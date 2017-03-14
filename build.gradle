@@ -1,5 +1,5 @@
 /*
-
+	Lab 05
     1. Add a `helloWorld` task that prints 'hello world'.
     2. Execute this task.
     3. Add a `printDate` task that prints out the current date.
@@ -10,6 +10,18 @@
     7. Execute `gradle tasks` again.
 */
 
+
+/*
+	Lab 06
+    1. Make the `date` task depend on the `hello` task.
+    2. Execute the `date` task.
+    3. Execute `gradle tasks --all`.
+    4. The `--dry-run` (or `-m`) command line option executes the build but disables all actions. Execute `date` with the `--dry-run` option.
+    5. Add some top level `println` statements to the script.
+    6. Add a `println` statement to the configuration block of the `date` task.
+    7. Execute the `hello` task and analyze the output.
+*/
+
 task (helloWorld){
 	description = "Print hello world"
 	doLast{			// if we don't add doLast, then all the statements in the tasks are executed by default
@@ -17,8 +29,11 @@ task (helloWorld){
 	}
 }
 
-task (printDate){
-	print "Today's date: " + getDate()
+task (printDate) {
+	dependsOn helloWorld
+	doLast{
+		print "Today's date: " + getDate()
+	}
 }
 
 def getDate(){
