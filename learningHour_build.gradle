@@ -1,0 +1,33 @@
+/*
+	Practice gradle file during learning hour
+*/
+
+task (hello) {
+	println "welcome to gradle"
+	doLast{
+		//task taskG
+	}
+}
+
+// This doesn't work as our taskG, which is our final task has already executed.
+
+task copyImages (type: Copy){
+	from 'source'
+	into 'destination'
+}
+
+task task2{
+	print "in task2"
+}
+
+task2.dependsOn{
+	task hello
+}
+
+task taskG {
+	println "In task G, GoodBye!"
+	doLast{			
+		task hello
+	}
+}
+
