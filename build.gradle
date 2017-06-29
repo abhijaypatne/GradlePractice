@@ -22,15 +22,21 @@
     7. Execute the `hello` task and analyze the output.
 */
 
+// printDate depends helloWorld: check whats wrong with this?
+
+println "Start of the the script"
+
 task (helloWorld){
 	description = "Print hello world"
+	// dependsOn printDate		// This will help, as it doesn't know the task yet
+	dependsOn "printDate"	// In this case, gradle treats the task name as string and will search for it in the entire documents
 	doLast{			// if we don't add doLast, then all the statements in the tasks are executed by default
 		println "Hello world!"
 	}
 }
 
 task (printDate) {
-	dependsOn helloWorld
+	//dependsOn helloWorld
 	doLast{
 		print "Today's date: " + getDate()
 	}
@@ -41,3 +47,5 @@ def getDate(){
 	def formattedDate = date.format('yyyy/MM/dd-HH:mm:ss')
 	return formattedDate
 }
+
+println "GoodBye"
